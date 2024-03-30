@@ -2,7 +2,7 @@ package midi
 
 import "github.com/pazifical/midi-hero/internal/drumkit"
 
-type MidiNote int
+type MidiNote uint8
 
 var DrumMapping = map[MidiNote]drumkit.Part{
 	35:  drumkit.Kick,
