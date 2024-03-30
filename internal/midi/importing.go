@@ -3,6 +3,7 @@ package midi
 import (
 	"bytes"
 	"fmt"
+	"math"
 	"os"
 
 	"github.com/pazifical/midi-hero/internal/clonehero"
@@ -26,10 +27,11 @@ func ImportFile(filePath string) (clonehero.Chart, error) {
 	timeSignatures := make([]clonehero.TimeSignature, 0)
 
 	smf.ReadTracksFrom(reader).Do(func(ev smf.TrackEvent) {
+		fmt.Printf("track %v %d @%vms %s\n", ev.TrackNo, ev.AbsTicks, ev.AbsMicroSeconds/1000, ev.Message)
+
 		var channel uint8
 		var key uint8
 		var velocity uint8
-
 		isNoteOn := ev.Message.GetNoteOn(&channel, &key, &velocity)
 		if isNoteOn {
 			part, ok := DrumMapping[MidiNote(key)]
@@ -63,14 +65,15 @@ func ImportFile(filePath string) (clonehero.Chart, error) {
 		var demiSemiQuaverPerQuarter uint8
 		isTimeSig := ev.Message.GetMetaTimeSig(&numerator, &denominator, &clocksPerClick, &demiSemiQuaverPerQuarter)
 		if isTimeSig {
+			denominatorExp := math.Sqrt(float64(denominator))
 			timeSignatures = append(timeSignatures, clonehero.NewTimeSignature(
 				int(ev.AbsTicks),
 				int(numerator),
-				int(denominator),
+				int(denominatorExp),
 			))
 			return
 		}
-		// fmt.Printf("track %v %d @%vms %s\n", ev.TrackNo, ev.AbsTicks, ev.AbsMicroSeconds/1000, ev.Message)
+
 	})
 
 	chart := clonehero.Chart{

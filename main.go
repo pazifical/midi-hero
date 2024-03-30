@@ -8,12 +8,12 @@ import (
 )
 
 func main() {
-	chart, err := midi.ImportFile("testdata/song2.mid")
+	chart, err := midi.ImportFile("testdata/midi.mid")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	err = clonehero.WriteToFile(chart, "testdata/song2.chart")
+	err = clonehero.WriteToFile(chart, "testdata/midi.chart")
 	if err != nil {
 		log.Fatal(err)
 	}

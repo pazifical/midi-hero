@@ -1,0 +1,30 @@
+[Song]
+{
+  Offset = 0
+  Resolution = 0
+  Player2 = 
+  Difficulty = 0
+  PreviewStart = 0
+  PreviewEnd = 0
+  Genre = 
+  MediaType = 
+}
+[SyncTrack]
+{
+  0 = TS 4 2
+  0 = B 110000
+}
+[Events]
+{
+}
+[ExpertDrums]
+{
+  0 = N 0 0
+  480 = N 1 0
+  960 = N 0 0
+  1440 = N 1 0
+  1920 = N 0 0
+  2400 = N 1 0
+  2880 = N 0 0
+  3360 = N 1 0
+}
