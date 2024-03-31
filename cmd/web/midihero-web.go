@@ -18,7 +18,7 @@ import (
 //go:embed static templates
 var embedFS embed.FS
 
-var port uint = 8080
+var port uint = 12468
 
 var chartDirectory = "charts"
 
@@ -43,9 +43,9 @@ func main() {
 	http.HandleFunc("GET /", serveIndex)
 	http.HandleFunc("POST /api/process", processMidi)
 
-	err := open(fmt.Sprintf("http://localhost:%d", port))
+	err := openDefaultWebBrowser(fmt.Sprintf("http://localhost:%d", port))
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 
 	err = http.ListenAndServe(fmt.Sprintf("localhost:%d", port), nil)
@@ -88,7 +88,7 @@ func processMidi(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
 
-func open(url string) error {
+func openDefaultWebBrowser(url string) error {
 	var cmd string
 	var args []string
 
