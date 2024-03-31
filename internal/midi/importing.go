@@ -81,7 +81,7 @@ func ImportFromReader(reader io.Reader) (clonehero.Chart, error) {
 			Offset:       0,
 			Resolution:   192,
 			Player2:      "Player2",
-			Difficulty:   0,
+			Difficulty:   3,
 			PreviewStart: 0,
 			PreviewEnd:   0,
 			Genre:        "Genre",
