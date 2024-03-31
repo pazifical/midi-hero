@@ -25,8 +25,14 @@ func ImportFromReader(reader io.Reader) (clonehero.Chart, error) {
 		var velocity uint8
 		isNoteOn := ev.Message.GetNoteOn(&channel, &key, &velocity)
 		if isNoteOn {
+			fmt.Println("isNoteOn")
+			if velocity == 0 {
+				return
+			}
+
 			part, ok := DrumMapping[MidiNote(key)]
 			if !ok {
+				fmt.Printf("Did not find part for midi note %d\n", key)
 				return
 			}
 
