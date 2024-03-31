@@ -48,7 +48,7 @@ func ImportFromReader(reader io.Reader) (clonehero.Chart, error) {
 
 			part, ok := DrumMapping[MidiNote(key)]
 			if !ok {
-				fmt.Printf("Did not find part for midi note %d\n", key)
+				fmt.Printf("No drumkit instrument mapped to midi note %d\n", key)
 				return
 			}
 

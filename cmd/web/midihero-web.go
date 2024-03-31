@@ -41,7 +41,7 @@ func main() {
 	http.HandleFunc("GET /", serveIndex)
 	http.HandleFunc("POST /api/process", processMidi)
 
-	err := http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
+	err := http.ListenAndServe(fmt.Sprintf("localhost:%d", port), nil)
 	if err != nil {
 		log.Fatal(err)
 	}
