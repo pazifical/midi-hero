@@ -6,7 +6,9 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"os/exec"
 	"path/filepath"
+	"runtime"
 	"text/template"
 
 	"github.com/pazifical/midi-hero/internal/clonehero"
@@ -41,7 +43,12 @@ func main() {
 	http.HandleFunc("GET /", serveIndex)
 	http.HandleFunc("POST /api/process", processMidi)
 
-	err := http.ListenAndServe(fmt.Sprintf("localhost:%d", port), nil)
+	err := open(fmt.Sprintf("http://localhost:%d", port))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = http.ListenAndServe(fmt.Sprintf("localhost:%d", port), nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -79,4 +86,21 @@ func processMidi(w http.ResponseWriter, r *http.Request) {
 	}
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)
+}
+
+func open(url string) error {
+	var cmd string
+	var args []string
+
+	switch runtime.GOOS {
+	case "windows":
+		cmd = "cmd"
+		args = []string{"/c", "start"}
+	case "darwin":
+		cmd = "open"
+	default: // "linux", "freebsd", "openbsd", "netbsd"
+		cmd = "xdg-open"
+	}
+	args = append(args, url)
+	return exec.Command(cmd, args...).Start()
 }
