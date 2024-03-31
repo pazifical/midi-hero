@@ -7,7 +7,6 @@ document.getElementById("file").onchange = (event) => {
     return;
   }
 
-  let info = document.getElementById("info");
-  info.innerHTML = `Selected file: ${fileName}`;
-  info.style.display = "block";
+  document.getElementById("info").style.display = "block";
+  document.getElementById("selected-file").innerText = `"${fileName}"`;
 };
