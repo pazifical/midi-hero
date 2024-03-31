@@ -49,4 +49,7 @@ var styleMapping = map[drumkit.Part][]Note{
 	drumkit.RideBell:          {Blue, BlueAccent, BlueCymbal},
 	drumkit.Crash3Right:       {Green, GreenCymbal},
 	drumkit.China3Right:       {Green, GreenAccent, GreenCymbal},
+	drumkit.Tom1:              {Yellow},
+	drumkit.Tom2:              {Blue},
+	drumkit.Tom3:              {Green},
 }
