@@ -1,17 +1,17 @@
 [Song]
 {
   Offset = 0
-  Resolution = 0
-  Player2 = asd
+  Resolution = 192
+  Player2 = Player2
   Difficulty = 0
   PreviewStart = 0
   PreviewEnd = 0
-  Genre = asd
-  MediaType = asd
+  Genre = Genre
+  MediaType = MediaType
 }
 [SyncTrack]
 {
-  0 = TS 4
+  0 = TS 4 2
   0 = B 110000
 }
 [Events]

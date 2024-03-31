@@ -1,19 +1,32 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"log"
+	"os"
 
 	"github.com/pazifical/midi-hero/internal/clonehero"
 	"github.com/pazifical/midi-hero/internal/midi"
 )
 
 func main() {
-	chart, err := midi.ImportFile("testdata/midi.mid")
+	var filePath string
+	flag.StringVar(&filePath, "midi", "", "path to a midi file")
+	flag.Parse()
+
+	if filePath == "" {
+		os.Exit(1)
+	}
+
+	fmt.Println(filePath)
+
+	chart, err := midi.ImportFile(filePath)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	err = clonehero.WriteToFile(chart, "testdata/midi.chart")
+	err = clonehero.WriteToFile(chart, fmt.Sprintf("%s.chart", filePath))
 	if err != nil {
 		log.Fatal(err)
 	}

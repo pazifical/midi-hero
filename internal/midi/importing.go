@@ -80,7 +80,16 @@ func ImportFile(filePath string) (clonehero.Chart, error) {
 		ExpertDrums: clonehero.ExpertDrumSection{
 			Values: noteEvents,
 		},
-		Song:   clonehero.SongSection{},
+		Song: clonehero.SongSection{
+			Offset:       0,
+			Resolution:   192,
+			Player2:      "Player2",
+			Difficulty:   0,
+			PreviewStart: 0,
+			PreviewEnd:   0,
+			Genre:        "Genre",
+			MediaType:    "MediaType",
+		},
 		Events: clonehero.EventSection{},
 		SyncTrack: clonehero.SyncTrackSection{
 			TimeSignatures: timeSignatures,
