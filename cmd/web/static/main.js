@@ -14,3 +14,7 @@ document.getElementById("files").onchange = (event) => {
   selectedDiv.innerHTML =
     "<ul>" + fileNames.map((f) => `<li>${f}</li>`).join(" ") + "</ul>";
 };
+
+async function openConverted() {
+  await fetch("/api/open");
+}

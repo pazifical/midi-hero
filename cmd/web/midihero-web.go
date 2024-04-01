@@ -38,6 +38,7 @@ func main() {
 	http.Handle("GET /static/", http.FileServerFS(embedFS))
 
 	http.HandleFunc("GET /", serveIndex)
+	http.HandleFunc("GET /api/open", openConvertedDirectory)
 	http.HandleFunc("POST /api/process", processMidi)
 
 	err := openDefaultWebBrowser(fmt.Sprintf("http://localhost:%d", port))
@@ -56,6 +57,29 @@ func serveIndex(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
+}
+
+func openConvertedDirectory(w http.ResponseWriter, r *http.Request) {
+	var cmd string
+	var args []string
+
+	switch runtime.GOOS {
+	case "windows":
+		cmd = "cmd"
+		args = []string{"/c", "start"}
+	case "darwin":
+		cmd = "open"
+	default: // "linux", "freebsd", "openbsd", "netbsd"
+		cmd = "xdg-open"
+	}
+
+	args = append(args, chartDirectory)
+	err := exec.Command(cmd, args...).Start()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.WriteHeader(http.StatusOK)
 }
 
 func processMidi(w http.ResponseWriter, r *http.Request) {
