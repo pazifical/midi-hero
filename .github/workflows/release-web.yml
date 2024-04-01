@@ -23,3 +23,5 @@ jobs:
           goarch: ${{ matrix.goarch }}
           goversion: "1.22"
           extra_files: README.md
+          project_path: "./cmd/web"
+          binary_name: "midi-hero-web"
