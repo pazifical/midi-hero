@@ -86,7 +86,6 @@ func ImportFromReader(reader io.Reader) (clonehero.Chart, error) {
 			))
 			return
 		}
-
 	})
 
 	chart := clonehero.Chart{

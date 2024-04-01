@@ -9,6 +9,13 @@ body {
   color: white;
 }
 
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+}
+
 main {
   max-width: 1200px;
   margin: auto;
@@ -27,6 +34,11 @@ label {
   border-radius: 1rem;
   border: 2px solid black;
   cursor: pointer;
+}
+
+.button:hover {
+  background-color: white;
+  color: black;
 }
 
 input[type="file"] {

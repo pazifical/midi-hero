@@ -9,28 +9,57 @@
   </head>
   <body>
     <main>
-      <h1>Midi Hero</h1>
-
-      <form action="/api/process" method="POST" enctype="multipart/form-data">
-        <div style="display: inline-block">
-          <label class="button secondary" for="file">
-            Select a midi file
-            <input id="file" name="file" type="file" accept=".mid,.midi" />
-          </label>
+      <header>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid white;
+          "
+        >
+          <div>
+            <h1>MIDI</h1>
+            <h1>HERO</h1>
+          </div>
+          <div>
+            <h3 style="font-weight: normal">Convert Midi Drum</h3>
+            <h3 style="font-weight: normal">Files To Clone Hero</h3>
+            <h3 style="font-weight: normal">Expert Drum Charts</h3>
+          </div>
         </div>
-        <input
-          id="submit"
-          class="button"
-          type="submit"
-          value="Convert"
-          style="display: none"
-        />
-      </form>
+      </header>
+      <br />
+      <br />
+      <div>
+        <form action="/api/process" method="POST" enctype="multipart/form-data">
+          <div style="display: inline-block">
+            <label class="button secondary" for="files">
+              Select midi files
+              <input
+                id="files"
+                name="files"
+                type="file"
+                accept=".mid,.midi"
+                multiple
+              />
+            </label>
+          </div>
+          <input
+            id="submit"
+            class="button"
+            type="submit"
+            value="Convert"
+            style="display: none"
+          />
+        </form>
+      </div>
 
       <br />
       <div id="info" style="display: none">
-        <strong>Selected file:</strong>
-        <span id="selected-file"></span>
+        <strong>Selected files:</strong>
+        <br />
+        <span id="selected-files"></span>
       </div>
     </main>
     <script src="/static/main.js"></script>

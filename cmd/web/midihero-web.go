@@ -31,10 +31,7 @@ func init() {
 	}
 	templates = t
 
-	err = os.Mkdir(chartDirectory, 0750)
-	if err != nil {
-		log.Println(err)
-	}
+	os.Mkdir(chartDirectory, 0750)
 }
 
 func main() {
@@ -64,25 +61,29 @@ func serveIndex(w http.ResponseWriter, r *http.Request) {
 func processMidi(w http.ResponseWriter, r *http.Request) {
 	r.ParseMultipartForm(32 << 20)
 
-	file, fileHeader, err := r.FormFile("file")
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	defer file.Close()
+	fhs := r.MultipartForm.File["files"]
+	for _, fileHeader := range fhs {
+		file, err := fileHeader.Open()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		defer file.Close()
 
-	chart, err := midi.ImportFromReader(file)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
+		chart, err := midi.ImportFromReader(file)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
 
-	fileName := fmt.Sprintf("%s.chart", fileHeader.Filename)
-	filePath := filepath.Join(chartDirectory, fileName)
-	err = clonehero.WriteToFile(chart, fmt.Sprintf("%s.chart", filePath))
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
+		fileName := fmt.Sprintf("%s.chart", fileHeader.Filename)
+		filePath := filepath.Join(chartDirectory, fileName)
+		err = clonehero.WriteToFile(chart, fmt.Sprintf("%s.chart", filePath))
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
 	}
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)
