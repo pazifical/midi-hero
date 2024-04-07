@@ -35,9 +35,4 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	// err = clonehero.WriteToFile(chart, fmt.Sprintf("%s.chart", filePath))
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
 }
