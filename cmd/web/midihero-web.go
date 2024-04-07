@@ -83,7 +83,11 @@ func openConvertedDirectory(w http.ResponseWriter, r *http.Request) {
 }
 
 func processMidi(w http.ResponseWriter, r *http.Request) {
-	r.ParseMultipartForm(32 << 20)
+	err := r.ParseMultipartForm(32 << 20)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 
 	fhs := r.MultipartForm.File["files"]
 	for _, fileHeader := range fhs {
