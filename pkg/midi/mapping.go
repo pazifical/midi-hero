@@ -1,6 +1,6 @@
 package midi
 
-import "github.com/pazifical/midi-hero/internal/drumkit"
+import "github.com/pazifical/midi-hero/pkg/drumkit"
 
 type MidiNote uint8
 

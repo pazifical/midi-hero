@@ -7,7 +7,7 @@ import (
 	"math"
 	"os"
 
-	"github.com/pazifical/midi-hero/internal/clonehero"
+	"github.com/pazifical/midi-hero/pkg/clonehero"
 	"gitlab.com/gomidi/midi/v2"
 	"gitlab.com/gomidi/midi/v2/smf"
 )

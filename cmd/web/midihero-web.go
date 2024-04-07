@@ -11,8 +11,8 @@ import (
 	"runtime"
 	"text/template"
 
-	"github.com/pazifical/midi-hero/internal/clonehero"
-	"github.com/pazifical/midi-hero/internal/midi"
+	"github.com/pazifical/midi-hero/pkg/clonehero"
+	"github.com/pazifical/midi-hero/pkg/midi"
 )
 
 //go:embed static templates

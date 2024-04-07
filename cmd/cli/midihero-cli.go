@@ -6,8 +6,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/pazifical/midi-hero/internal/clonehero"
-	"github.com/pazifical/midi-hero/internal/midi"
+	"github.com/pazifical/midi-hero/pkg/clonehero"
+	"github.com/pazifical/midi-hero/pkg/midi"
 )
 
 func main() {
@@ -16,10 +16,9 @@ func main() {
 	flag.Parse()
 
 	if filePath == "" {
+		fmt.Println("Please provide a file path")
 		os.Exit(1)
 	}
-
-	fmt.Println(filePath)
 
 	chart, err := midi.ImportFile(filePath)
 	if err != nil {

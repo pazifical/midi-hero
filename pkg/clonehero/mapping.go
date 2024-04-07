@@ -3,7 +3,7 @@ package clonehero
 import (
 	"fmt"
 
-	"github.com/pazifical/midi-hero/internal/drumkit"
+	"github.com/pazifical/midi-hero/pkg/drumkit"
 )
 
 type Note uint8
