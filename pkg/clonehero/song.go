@@ -59,7 +59,7 @@ func (sts *SyncTrackSection) String() string {
 	var builder strings.Builder
 	builder.WriteString("{\n")
 	for _, ts := range sts.TimeSignatures {
-		builder.WriteString(fmt.Sprintf("  %d = TS %d %d\n", ts.position, ts.numerator, ts.denominator))
+		builder.WriteString(fmt.Sprintf("  %d = TS %d %d\n", ts.Position, ts.Numerator, ts.Denominator))
 	}
 	for _, ts := range sts.Tempos {
 		builder.WriteString(fmt.Sprintf("  %d = B %d\n", ts.Position, ts.MilliBPM))
@@ -83,9 +83,9 @@ type Tempo struct {
 // 768 = TS 7 4   // 7/16
 // 1104 = TS 3 3  // 3/8
 type TimeSignature struct {
-	position    int
-	numerator   int
-	denominator int
+	Position    int
+	Numerator   int
+	Denominator int
 }
 
 func NewTimeSignature(position, numerator, denominator int) TimeSignature {
@@ -93,9 +93,9 @@ func NewTimeSignature(position, numerator, denominator int) TimeSignature {
 		denominator = 2
 	}
 	return TimeSignature{
-		position:    position,
-		numerator:   numerator,
-		denominator: denominator,
+		Position:    position,
+		Numerator:   numerator,
+		Denominator: denominator,
 	}
 }
 
